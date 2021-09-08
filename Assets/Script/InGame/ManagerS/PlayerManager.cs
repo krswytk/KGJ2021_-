@@ -7,13 +7,14 @@ public class PlayerManager : MonoBehaviour
     private SceneManagerScript SceneManagerScript;
     [SerializeField] private SkilManager SkilManager;
 
-    [Header("–¡•û–{w‚ÌHP")]
+    [Header("å‘³æ–¹æœ¬é™£ã®HP")]
     [SerializeField] private int PlayerHomeHP = 100;
-    [Header("–¡•û‚ÌMPMax—Ê")]
+    [Header("å‘³æ–¹ã®MPMaxé‡")]
     [SerializeField] private int MpMax = 100;
-    [Header("–¡•û‚ÌMP‰ñ•œ—Ê(•b)")]
+    [Header("å‘³æ–¹ã®MPå›å¾©é‡(ç§’)")]
     [SerializeField] private int MpHeal = 10;
     private int MP;
+    private float MPTimer;
 
    
 
@@ -27,15 +28,23 @@ public class PlayerManager : MonoBehaviour
         
         Timer = 0f;
         MP = MpMax;
-        //MP‚Ì‰ñ•œ
-        StartCoroutine(MPHeal());
-
+        MPTimer = 0f;
     }
 
     void Update()
     {
-        //ŠÔŒv‘ª
+        //æ™‚é–“è¨ˆæ¸¬
         Timer += Time.deltaTime;
+        MPTimer += Time.deltaTime;
+
+        if (MPTimer > 1)
+        {
+            MPTimer = 0f;
+            MP += MpHeal;
+            if (MP > MpMax) MP = MpMax;
+            Debug.Log("MP = " + MP);
+        }
+
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha1)) SkilOn(1, 0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SkilOn(2, 0);
@@ -47,46 +56,113 @@ public class PlayerManager : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        //’e‚É“–‚½‚Á‚½
+        //å¼¾ã«å½“ãŸã£ãŸ
         if (other.tag == "Bullet")
         {
             PlayerHomeHP--;
         }
-        //ƒ‚ƒu‚É“–‚½‚Á‚½
+        //ãƒ¢ãƒ–ã«å½“ãŸã£ãŸ
         if (other.tag == "Enemy")
         {
             PlayerHomeHP -= 5;
         }
 
-        //”s–kˆ—
+        //æ•—åŒ—å‡¦ç†
         if (PlayerHomeHP < 1)
         {
-            Debug.Log("‚Ü‚¯‚¿‚á‚Á‚½");
+            Debug.Log("ã¾ã‘ã¡ã‚ƒã£ãŸ");
             SceneManagerScript.LoadRisult();
         }
     }
 
-    //ƒXƒLƒ‹”­“®ˆ—
+    //ã‚¹ã‚­ãƒ«ç™ºå‹•å‡¦ç†
+    private int MPCost = 0;
     public void SkilOn(int i,int x)
     {
         switch (i){
 
-            case 0: SkilManager.Skill_1(); MP -= 20; break;
+            case 0:
+                var MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_1();
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
+                }
+                break;
 
-            case 1: SkilManager.Skill_1(); MP -= 20; break;
+            case 1:
+                MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_1();
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
+                }
+                break;
 
-            case 2: SkilManager.Skill_2(); MP -= 20; break;
+            case 2:
+                MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_2();
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
+                }
+                break;
 
-            case 3: SkilManager.Skill_3(); MP -= 20; break;
+            case 3:
+                MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_3();
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
+                }
+                break;
 
-            case 4: SkilManager.Skill_4(x); MP -= 20; break;
+            case 4:
+                MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_4(x);
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
+                }
+                break;
 
-            case 5: SkilManager.Skill_5(x); MP -= 20; break;
+            case 5:
+                MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_5(x);
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
+                }
+                break;
 
             default: break;
         }
 
-        GameObject MPGauge = GameObject.Find("MPGauge");//MPƒQ[ƒW‚Ìæ“¾
+        GameObject MPGauge = GameObject.Find("MPGauge");//MPã‚²ãƒ¼ã‚¸ã®å–å¾—
         MPGauge.GetComponent<PlayerMP>().UsingMP(MP, MpMax);
 
         Debug.Log("MP = " + MP);
@@ -98,7 +174,7 @@ public class PlayerManager : MonoBehaviour
 
         MP += MpHeal;
         if (MP > MpMax) MP = MpMax;
-        GameObject MPGauge = GameObject.Find("MPGauge");//MPƒQ[ƒW‚Ìæ“¾
+        GameObject MPGauge = GameObject.Find("MPGauge");//MPã‚²ãƒ¼ã‚¸ã®å–å¾—
         MPGauge.GetComponent<PlayerMP>().UsingMP(MP, MpMax);
 
         Debug.Log("aaaaaaMP = " + MP);
