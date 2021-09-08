@@ -24,8 +24,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (!SkilManager) { GameObject.Find("SkilManager").GetComponent<SkilManager>(); }
         SceneManagerScript = SceneManagerScript.Instance;
+       
 
-        
         Timer = 0f;
         MP = MpMax;
         MPTimer = 0f;
@@ -42,6 +42,9 @@ public class PlayerManager : MonoBehaviour
             MPTimer = 0f;
             MP += MpHeal;
             if (MP > MpMax) MP = MpMax;
+            GameObject MPGauge = GameObject.Find("MPGauge");//MPゲージの取得
+            MPGauge.GetComponent<PlayerMP>().UsingMP(MP, MpMax);
+
             Debug.Log("MP = " + MP);
         }
 
@@ -168,16 +171,5 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("MP = " + MP);
     }
 
-    private IEnumerator MPHeal()
-    {
-        yield return new WaitForSeconds(1);
-
-        MP += MpHeal;
-        if (MP > MpMax) MP = MpMax;
-        GameObject MPGauge = GameObject.Find("MPGauge");//MPゲージの取得
-        MPGauge.GetComponent<PlayerMP>().UsingMP(MP, MpMax);
-
-        Debug.Log("aaaaaaMP = " + MP);
-        yield return null;
-    }
+   
 }
