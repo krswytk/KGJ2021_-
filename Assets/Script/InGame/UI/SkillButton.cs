@@ -16,6 +16,8 @@ public class SkillButton : MonoBehaviour
         if(!PlayerManager) PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager").GetComponent<PlayerManager>();
         if (!WallAreaImage) WallAreaImage = GameObject.Find("WallAreaImage");
         if (!HealAreaImage) HealAreaImage = GameObject.Find("HealAreaImage");
+        WallAreaImage.SetActive(false);
+        HealAreaImage.SetActive(false);
     }
 
     public void Skill1()
@@ -46,6 +48,16 @@ public class SkillButton : MonoBehaviour
     }
     public void Skill5()
     {
+        if (!WallSw)
+        {
+            WallSw = true;
+            WallAreaImage.SetActive(true);
+        }
+        else
+        {
+            WallSw = false;
+            WallAreaImage.SetActive(false);
+        }
         PlayerManager.SkilOn(1, 0);
     }
 

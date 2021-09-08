@@ -10,6 +10,7 @@ TagManager:
   - SceneManager
   - SceneManagerScript
   - Heal
+  - Canvas
   layers:
   - Default
   - TransparentFX
