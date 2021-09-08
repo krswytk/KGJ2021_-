@@ -15,6 +15,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int MpHeal = 10;
     private int MP;
 
+   
+
     private float Timer = 0f;
 
     void Start()
@@ -22,10 +24,12 @@ public class PlayerManager : MonoBehaviour
         if (!SkilManager) { GameObject.Find("SkilManager").GetComponent<SkilManager>(); }
         SceneManagerScript = SceneManagerScript.Instance;
 
+        
         Timer = 0f;
         MP = MpMax;
         //MPの回復
         StartCoroutine(MPHeal());
+
     }
 
     void Update()
@@ -81,6 +85,10 @@ public class PlayerManager : MonoBehaviour
 
             default: break;
         }
+
+        GameObject MPGauge = GameObject.Find("MPGauge");//MPゲージの取得
+        MPGauge.GetComponent<PlayerMP>().UsingMP(MP, MpMax);
+
         Debug.Log("MP = " + MP);
     }
 
@@ -90,7 +98,10 @@ public class PlayerManager : MonoBehaviour
 
         MP += MpHeal;
         if (MP > MpMax) MP = MpMax;
+        GameObject MPGauge = GameObject.Find("MPGauge");//MPゲージの取得
+        MPGauge.GetComponent<PlayerMP>().UsingMP(MP, MpMax);
 
+        Debug.Log("aaaaaaMP = " + MP);
         yield return null;
     }
 }
