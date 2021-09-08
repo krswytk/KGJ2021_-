@@ -7,6 +7,8 @@ TagManager:
   - InGameManager
   - PlayerManager
   - EnemyManager
+  - SceneManager
+  - SceneManagerScript
   layers:
   - Default
   - TransparentFX
