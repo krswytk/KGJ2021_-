@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Rigidbody2D.velocity = SpeedVector*Time.deltaTime;
+        Rigidbody2D.velocity = SpeedVector;
     }
 
     public void Hit(int Damage)
