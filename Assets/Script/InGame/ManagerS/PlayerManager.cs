@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour
     [Header("味方のMP回復量(秒)")]
     [SerializeField] private int MpHeal = 10;
     private int MP;
+    private float MPTimer;
 
     private float Timer = 0f;
 
@@ -24,14 +25,23 @@ public class PlayerManager : MonoBehaviour
 
         Timer = 0f;
         MP = MpMax;
-        //MPの回復
-        StartCoroutine(MPHeal());
+        MPTimer = 0f;
     }
 
     void Update()
     {
         //時間計測
         Timer += Time.deltaTime;
+        MPTimer += Time.deltaTime;
+
+        if (MPTimer > 1)
+        {
+            MPTimer = 0f;
+            MP += MpHeal;
+            if (MP > MpMax) MP = MpMax;
+            Debug.Log("MP = " + MP);
+        }
+
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha1)) SkilOn(1, 0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SkilOn(2, 0);
@@ -63,33 +73,97 @@ public class PlayerManager : MonoBehaviour
     }
 
     //スキル発動処理
+    private int MPCost = 0;
     public void SkilOn(int i,int x)
     {
         switch (i){
 
-            case 0: SkilManager.Skill_1(); MP -= 20; break;
+            case 0:
+                var MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_1();
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("魔力が足りないよ！");
+                }
+                break;
 
-            case 1: SkilManager.Skill_1(); MP -= 20; break;
+            case 1:
+                MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_1();
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("魔力が足りないよ！");
+                }
+                break;
 
-            case 2: SkilManager.Skill_2(); MP -= 20; break;
+            case 2:
+                MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_2();
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("魔力が足りないよ！");
+                }
+                break;
 
-            case 3: SkilManager.Skill_3(); MP -= 20; break;
+            case 3:
+                MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_3();
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("魔力が足りないよ！");
+                }
+                break;
 
-            case 4: SkilManager.Skill_4(x); MP -= 20; break;
+            case 4:
+                MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_4(x);
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("魔力が足りないよ！");
+                }
+                break;
 
-            case 5: SkilManager.Skill_5(x); MP -= 20; break;
+            case 5:
+                MPCost = SkilManager.MPCostCheck(MP, 0);
+                if (MPCost != -1)
+                {
+                    SkilManager.Skill_5(x);
+                    MP -= 20;
+                }
+                else
+                {
+                    Debug.Log("魔力が足りないよ！");
+                }
+                break;
 
             default: break;
         }
-        Debug.Log("MP = " + MP);
     }
 
     private IEnumerator MPHeal()
     {
         yield return new WaitForSeconds(1);
 
-        MP += MpHeal;
-        if (MP > MpMax) MP = MpMax;
 
         yield return null;
     }

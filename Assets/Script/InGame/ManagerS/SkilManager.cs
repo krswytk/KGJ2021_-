@@ -11,6 +11,8 @@ public class SkilManager : MonoBehaviour
     [SerializeField] private GameObject Magic;
     [SerializeField] private float MagicTime = 10;
 
+    [SerializeField] private int[] ArthMP = { 20, 20, 20, 20, 20, 20 };
+
     private float Timer;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,17 @@ public class SkilManager : MonoBehaviour
     {
         Timer += Time.deltaTime;
     }
-
+    public int MPCostCheck(int MP ,int i)
+    {
+        if(MP > ArthMP[i])
+        {
+            return ArthMP[i];
+        }
+        else
+        {
+            return -1;
+        }
+    }
 
     public void Skill_1()
     {
