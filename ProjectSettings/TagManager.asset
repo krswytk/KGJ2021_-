@@ -9,6 +9,7 @@ TagManager:
   - EnemyManager
   - SceneManager
   - SceneManagerScript
+  - Heal
   layers:
   - Default
   - TransparentFX

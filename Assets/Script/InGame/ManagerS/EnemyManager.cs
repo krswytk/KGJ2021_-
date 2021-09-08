@@ -17,18 +17,23 @@ public class EnemyManager : MonoBehaviour
 
     [Header("敵のプレハブ")]
     [SerializeField] private GameObject[] EnemyPrefab;
+    [Header("敵のプレハブ生成位置")]
+    [SerializeField] private GameObject Enemys;
+    private Vector2 EnemyPos;
+    private Transform EnemysTransform;
 
     private float CoolTimer = 0f;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         CoolTimer = 60f;
 
         SceneManagerScript = SceneManagerScript.Instance;
-    }
 
-    // Update is called once per frame
+        EnemysTransform = Enemys.GetComponent<Transform>();
+        EnemyPos = new Vector2(EnemysTransform.position.x, EnemysTransform.position.y);
+    }
+    
     void Update()
     {
         //時間計測
@@ -44,14 +49,27 @@ public class EnemyManager : MonoBehaviour
     //敵の生成
     private void CreateEnemy()
     {
-        var Ramde = Random.Range(0,EnemyPrefab.GetLength(0) + 1);
-        Instantiate(EnemyPrefab[Ramde], this.transform);
+        var Ramde = Random.Range(0,EnemyPrefab.GetLength(0));
+        Instantiate(EnemyPrefab[Ramde], EnemyPos, Quaternion.identity, Enemys.transform);
     }
-    public void Hit(int Damage)
+
+    public void OnTriggerEnter(Collider other)
     {
-        EnemyHomeHP -= Damage;
-        if(EnemyHomeHP < 1)
+        //弾に当たった
+        if (other.tag == "Bullet")
         {
+            EnemyHomeHP--;
+        }
+        //モブに当たった
+        if(other.tag == "Player")
+        {
+            EnemyHomeHP -= 5;
+        }
+
+        //勝利処理
+        if (EnemyHomeHP < 1)
+        {
+            Debug.Log("勝った勝った！");
             SceneManagerScript.LoadRisult();
         }
     }
