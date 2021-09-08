@@ -502,9 +502,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d617f6a4cdf773b4e8793112c48901ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Army1: {fileID: 7030601526874048729, guid: baee6aa0a8491b9408d7f234b92c1511, type: 3}
-  Army2: {fileID: 1590320778088443134, guid: 079c40abd810a8c459bae748fb95c056, type: 3}
-  Army3: {fileID: 3250628729600253192, guid: 3f707ac5ddbf892488476788507ad4b0, type: 3}
+  Army1: {fileID: 7488869362523326106, guid: 1598fa7af9bdf83478e71156267c6275, type: 3}
+  Army2: {fileID: 6340827818868308208, guid: 7a74c78cce814604a8edc4a7f391abd6, type: 3}
+  Army3: {fileID: 8881430203264472036, guid: 01acf1162795d9c469fbaa245e8b242c, type: 3}
   Wall: {fileID: 2597698479407910071, guid: dfc8fc7c297c5204eb60e4b0e7bf3d8a, type: 3}
   Magic: {fileID: 1920325297268671343, guid: 889dd67908ff48640a817f0b0074814e, type: 3}
   MagicTime: 10

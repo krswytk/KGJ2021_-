@@ -26,11 +26,11 @@ public class SkillButton : MonoBehaviour
     }
     public void Skill2()
     {
-        PlayerManager.SkilOn(1, 0);
+        PlayerManager.SkilOn(2, 0);
     }
     public void Skill3()
     {
-        PlayerManager.SkilOn(1, 0);
+        PlayerManager.SkilOn(3, 0);
     }
     public void Skill4()
     {
@@ -44,7 +44,7 @@ public class SkillButton : MonoBehaviour
             WallSw = false;
             WallAreaImage.SetActive(false);
         }
-        PlayerManager.SkilOn(1, 0);
+        PlayerManager.SkilOn(4, 0);
     }
     public void Skill5()
     {
@@ -58,7 +58,7 @@ public class SkillButton : MonoBehaviour
             WallSw = false;
             WallAreaImage.SetActive(false);
         }
-        PlayerManager.SkilOn(1, 0);
+        PlayerManager.SkilOn(5, 0);
     }
 
 }
