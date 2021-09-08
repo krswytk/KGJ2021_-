@@ -7,14 +7,16 @@ public class PlayerManager : MonoBehaviour
     private SceneManagerScript SceneManagerScript;
     [SerializeField] private SkilManager SkilManager;
 
-    [Header("–¡•û–{w‚ÌHP")]
+    [Header("å‘³æ–¹æœ¬é™£ã®HP")]
     [SerializeField] private int PlayerHomeHP = 100;
-    [Header("–¡•û‚ÌMPMax—Ê")]
+    [Header("å‘³æ–¹ã®MPMaxé‡")]
     [SerializeField] private int MpMax = 100;
-    [Header("–¡•û‚ÌMP‰ñ•œ—Ê(•b)")]
+    [Header("å‘³æ–¹ã®MPå›å¾©é‡(ç§’)")]
     [SerializeField] private int MpHeal = 10;
     private int MP;
     private float MPTimer;
+
+   
 
     private float Timer = 0f;
 
@@ -23,6 +25,7 @@ public class PlayerManager : MonoBehaviour
         if (!SkilManager) { GameObject.Find("SkilManager").GetComponent<SkilManager>(); }
         SceneManagerScript = SceneManagerScript.Instance;
 
+        
         Timer = 0f;
         MP = MpMax;
         MPTimer = 0f;
@@ -30,7 +33,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        //ŠÔŒv‘ª
+        //æ™‚é–“è¨ˆæ¸¬
         Timer += Time.deltaTime;
         MPTimer += Time.deltaTime;
 
@@ -53,26 +56,26 @@ public class PlayerManager : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        //’e‚É“–‚½‚Á‚½
+        //å¼¾ã«å½“ãŸã£ãŸ
         if (other.tag == "Bullet")
         {
             PlayerHomeHP--;
         }
-        //ƒ‚ƒu‚É“–‚½‚Á‚½
+        //ãƒ¢ãƒ–ã«å½“ãŸã£ãŸ
         if (other.tag == "Enemy")
         {
             PlayerHomeHP -= 5;
         }
 
-        //”s–kˆ—
+        //æ•—åŒ—å‡¦ç†
         if (PlayerHomeHP < 1)
         {
-            Debug.Log("‚Ü‚¯‚¿‚á‚Á‚½");
+            Debug.Log("ã¾ã‘ã¡ã‚ƒã£ãŸ");
             SceneManagerScript.LoadRisult();
         }
     }
 
-    //ƒXƒLƒ‹”­“®ˆ—
+    //ã‚¹ã‚­ãƒ«ç™ºå‹•å‡¦ç†
     private int MPCost = 0;
     public void SkilOn(int i,int x)
     {
@@ -87,7 +90,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("–‚—Í‚ª‘«‚è‚È‚¢‚æI");
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
                 }
                 break;
 
@@ -100,7 +103,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("–‚—Í‚ª‘«‚è‚È‚¢‚æI");
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
                 }
                 break;
 
@@ -113,7 +116,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("–‚—Í‚ª‘«‚è‚È‚¢‚æI");
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
                 }
                 break;
 
@@ -126,7 +129,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("–‚—Í‚ª‘«‚è‚È‚¢‚æI");
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
                 }
                 break;
 
@@ -139,7 +142,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("–‚—Í‚ª‘«‚è‚È‚¢‚æI");
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
                 }
                 break;
 
@@ -152,19 +155,29 @@ public class PlayerManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("–‚—Í‚ª‘«‚è‚È‚¢‚æI");
+                    Debug.Log("é­”åŠ›ãŒè¶³ã‚Šãªã„ã‚ˆï¼");
                 }
                 break;
 
             default: break;
         }
+
+        GameObject MPGauge = GameObject.Find("MPGauge");//MPã‚²ãƒ¼ã‚¸ã®å–å¾—
+        MPGauge.GetComponent<PlayerMP>().UsingMP(MP, MpMax);
+
+        Debug.Log("MP = " + MP);
     }
 
     private IEnumerator MPHeal()
     {
         yield return new WaitForSeconds(1);
 
+        MP += MpHeal;
+        if (MP > MpMax) MP = MpMax;
+        GameObject MPGauge = GameObject.Find("MPGauge");//MPã‚²ãƒ¼ã‚¸ã®å–å¾—
+        MPGauge.GetComponent<PlayerMP>().UsingMP(MP, MpMax);
 
+        Debug.Log("aaaaaaMP = " + MP);
         yield return null;
     }
 }
