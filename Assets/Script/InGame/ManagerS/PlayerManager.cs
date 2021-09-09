@@ -73,6 +73,9 @@ public class PlayerManager : MonoBehaviour
         //敗北処理
         if (PlayerHomeHP < 1)
         {
+
+            Lisult.GameSet = false;
+            
             Debug.Log("まけちゃった");
             SceneManagerScript.LoadRisult();
         }
