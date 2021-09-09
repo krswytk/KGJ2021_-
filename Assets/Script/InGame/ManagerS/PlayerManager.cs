@@ -6,9 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     private SceneManagerScript SceneManagerScript;
     [SerializeField] private SkilManager SkilManager;
-
-    [Header("味方本陣のHP")]
-    [SerializeField] private int PlayerHomeHP = 100;
+    
     [Header("味方のMPMax量")]
     [SerializeField] private int MpMax = 100;
     [Header("味方のMP回復量(秒)")]
@@ -69,31 +67,7 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5)) SkilOn(5, 0);
 #endif
     }
-
-    public void OnCollisionEnter(Collision other)
-    {
-        //弾に当たった
-        if (other.gameObject.tag == "Bullet")
-        {
-            PlayerHomeHP--;
-        }
-        //モブに当たった
-        if (other.gameObject.tag == "Enemy")
-        {
-            Debug.Log("aaa");
-            PlayerHomeHP -= 1;
-        }
-        //敗北処理
-        if (PlayerHomeHP < 1)
-        {
-
-            Lisult.GameSet = false;
-            
-            Debug.Log("まけちゃった");
-            SceneManagerScript.LoadRisult();
-        }
-    }
-
+    
     //スキル発動処理
     private int MPCost = 0;
     public void SkilOn(int i,int x)
@@ -182,8 +156,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         PlayerMP.UsingMP(MP, MpMax);//MPゲージに反映
-
-        //Debug.Log("MP = " + MP);
+        
     }
 
    

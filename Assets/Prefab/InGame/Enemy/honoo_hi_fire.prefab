@@ -99,6 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 1.5
   HP: 5
+  HitCoolTime: 0.5
+  _color:
+  - {fileID: 8446452191586190638}
 --- !u!50 &8446452191586190636
 Rigidbody2D:
   serializedVersion: 4
