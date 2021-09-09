@@ -53,19 +53,19 @@ public class EnemyManager : MonoBehaviour
         Instantiate(EnemyPrefab[Ramde], EnemyPos, Quaternion.identity, Enemys.transform);
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnCollisionEnter(Collision other)
     {
         //’e‚É“–‚½‚Á‚½
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Bullet")
+        if (other.gameObject.tag == "Bullet")
         {
             EnemyHomeHP--;
         }
         //ƒ‚ƒu‚É“–‚½‚Á‚½
-        if(LayerMask.LayerToName(other.gameObject.layer) == "Player")
+        if (other.gameObject.tag == "Enemy")
         {
-            EnemyHomeHP -= 5;
+            Debug.Log("aaa");
+            EnemyHomeHP -= 1;
         }
-
         //Ÿ—˜ˆ—
         if (EnemyHomeHP < 1)
         {

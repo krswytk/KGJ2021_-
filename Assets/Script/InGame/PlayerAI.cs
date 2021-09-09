@@ -61,16 +61,17 @@ public class PlayerAI : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
+        Debug.Log("aaa");
         //’e‚É“–‚½‚Á‚½
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Bullet")
+        if (other.gameObject.tag == "Bullet")
         {
             HP--;
         }
         //ƒ‚ƒu‚É“–‚½‚Á‚½
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
+            Debug.Log("aaa");
             HP -= 1;
-            Debug.Log("bbb");
         }
 
         //Ÿ—˜ˆ—

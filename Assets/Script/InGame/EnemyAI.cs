@@ -36,12 +36,12 @@ public class EnemyAI : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
         //’e‚É“–‚½‚Á‚½
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Bullet")
+        if (other.gameObject.tag == "Bullet")
         {
             HP--;
         }
         //ƒ‚ƒu‚É“–‚½‚Á‚½
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Player")
+        if (other.gameObject.tag == "Player")
         {
             Debug.Log("aaa");
             HP -=1;

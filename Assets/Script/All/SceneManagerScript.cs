@@ -23,5 +23,10 @@ public class SceneManagerScript : SingletonMonoBehaviour<SceneManagerScript>
         SceneManager.LoadScene("Risult");
     }
 
+
+    public void StrtBotton()
+    {
+        SceneManager.LoadScene("InGame");
+    }
     
 }
