@@ -22,6 +22,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         Rigidbody2D.velocity = SpeedVector;
+        // Rigidbody2D.velocity = SpeedVector * Time.deltaTime;
     }
 
     public void Hit(int Damage)
@@ -32,4 +33,29 @@ public class EnemyAI : MonoBehaviour
             Destroy(this);
         }
     }
+    public void OnCollisionEnter(Collision other)
+    {
+        //’e‚É“–‚½‚Á‚½
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Bullet")
+        {
+            HP--;
+        }
+        //ƒ‚ƒu‚É“–‚½‚Á‚½
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Player")
+        {
+            Debug.Log("aaa");
+            HP -=1;
+        }
+
+        //Ÿ—˜ˆ—
+        if (HP < 1)
+        {
+
+            this.gameObject.SetActive(false);
+        }
+    }
+
+
+
+
 }

@@ -60,12 +60,12 @@ public class PlayerManager : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         //弾に当たった
-        if (other.tag == "Bullet")
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Bullet")
         {
             PlayerHomeHP--;
         }
         //モブに当たった
-        if (other.tag == "Enemy")
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Enemy")
         {
             PlayerHomeHP -= 5;
         }
