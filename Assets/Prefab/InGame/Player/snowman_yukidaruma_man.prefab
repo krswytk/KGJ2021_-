@@ -100,6 +100,9 @@ MonoBehaviour:
   Speed: 1
   HP: 5
   HealCoolTime: 2
+  HitCoolTime: 0.5
+  _color:
+  - {fileID: 6340827818868308210}
 --- !u!50 &7560484786814578158
 Rigidbody2D:
   serializedVersion: 4

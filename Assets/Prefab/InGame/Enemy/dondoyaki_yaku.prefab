@@ -137,6 +137,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 1
   HP: 10
+  HitCoolTime: 0.5
+  _color:
+  - {fileID: 8935503589591018595}
 --- !u!95 &2233335710931627135
 Animator:
   serializedVersion: 3
