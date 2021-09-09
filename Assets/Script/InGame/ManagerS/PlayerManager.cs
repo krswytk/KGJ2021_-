@@ -15,8 +15,13 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int MpHeal = 10;
     private int MP;
     private float MPTimer;
+    [SerializeField] PlayerMP PlayerMP;
 
-   
+    // 位置座標
+    private Vector3 position;
+    // スクリーン座標をワールド座標に変換した位置座標
+    private Vector3 screenToWorldPointPosition;
+
 
     private float Timer = 0f;
 
@@ -24,7 +29,9 @@ public class PlayerManager : MonoBehaviour
     {
         if (!SkilManager) { GameObject.Find("SkilManager").GetComponent<SkilManager>(); }
         SceneManagerScript = SceneManagerScript.Instance;
-       
+
+
+        if (!PlayerMP) { GameObject.Find("MPGauge").GetComponent<PlayerMP>(); }
 
         Timer = 0f;
         MP = MpMax;
@@ -42,11 +49,17 @@ public class PlayerManager : MonoBehaviour
             MPTimer = 0f;
             MP += MpHeal;
             if (MP > MpMax) MP = MpMax;
-            GameObject MPGauge = GameObject.Find("MPGauge");//MPゲージの取得
-            MPGauge.GetComponent<PlayerMP>().UsingMP(MP, MpMax);
+            PlayerMP.UsingMP(MP, MpMax);//MPゲージに反映
 
-            Debug.Log("MP = " + MP);
+            //Debug.Log("MP = " + MP);
         }
+
+        // Vector3でマウス位置座標を取得する
+        position = Input.mousePosition;
+        // Z軸修正
+        position.z = 10f;
+        // マウス位置座標をスクリーン座標からワールド座標に変換する
+        screenToWorldPointPosition = Camera.main.ScreenToWorldPoint(position);
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha1)) SkilOn(1, 0);
@@ -88,11 +101,11 @@ public class PlayerManager : MonoBehaviour
         switch (i){
 
             case 0:
-                var MPCost = SkilManager.MPCostCheck(MP, 0);
+                MPCost = SkilManager.MPCostCheck(MP, 0);
                 if (MPCost != -1)
                 {
                     SkilManager.Skill_1();
-                    MP -= 20;
+                    MP -= MPCost;
                 }
                 else
                 {
@@ -105,7 +118,7 @@ public class PlayerManager : MonoBehaviour
                 if (MPCost != -1)
                 {
                     SkilManager.Skill_1();
-                    MP -= 20;
+                    MP -= MPCost;
                 }
                 else
                 {
@@ -118,7 +131,7 @@ public class PlayerManager : MonoBehaviour
                 if (MPCost != -1)
                 {
                     SkilManager.Skill_2();
-                    MP -= 20;
+                    MP -= MPCost;
                 }
                 else
                 {
@@ -131,7 +144,7 @@ public class PlayerManager : MonoBehaviour
                 if (MPCost != -1)
                 {
                     SkilManager.Skill_3();
-                    MP -= 20;
+                    MP -= MPCost;
                 }
                 else
                 {
@@ -143,8 +156,8 @@ public class PlayerManager : MonoBehaviour
                 MPCost = SkilManager.MPCostCheck(MP, 0);
                 if (MPCost != -1)
                 {
-                    SkilManager.Skill_4(x);
-                    MP -= 20;
+                    SkilManager.Skill_4(screenToWorldPointPosition.x);
+                    MP -= MPCost;
                 }
                 else
                 {
@@ -156,8 +169,8 @@ public class PlayerManager : MonoBehaviour
                 MPCost = SkilManager.MPCostCheck(MP, 0);
                 if (MPCost != -1)
                 {
-                    SkilManager.Skill_5(x);
-                    MP -= 20;
+                    SkilManager.Skill_5(screenToWorldPointPosition.x);
+                    MP -= MPCost;
                 }
                 else
                 {
@@ -168,10 +181,9 @@ public class PlayerManager : MonoBehaviour
             default: break;
         }
 
-        GameObject MPGauge = GameObject.Find("MPGauge");//MPゲージの取得
-        MPGauge.GetComponent<PlayerMP>().UsingMP(MP, MpMax);
+        PlayerMP.UsingMP(MP, MpMax);//MPゲージに反映
 
-        Debug.Log("MP = " + MP);
+        //Debug.Log("MP = " + MP);
     }
 
    
