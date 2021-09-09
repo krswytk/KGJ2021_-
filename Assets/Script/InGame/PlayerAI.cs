@@ -30,7 +30,8 @@ public class PlayerAI : MonoBehaviour
     {
 
         //ˆÚ“®
-        Rigidbody2D.velocity = SpeedVector * Time.deltaTime;
+        Rigidbody2D.velocity = SpeedVector ;
+       // Rigidbody2D.velocity = SpeedVector * Time.deltaTime;
     }
 
     public void OnTriggerStay(Collider other)
@@ -55,4 +56,38 @@ public class PlayerAI : MonoBehaviour
 
         yield break;
     }
+
+
+
+    public void OnCollisionEnter(Collision other)
+    {
+        //’e‚É“–‚½‚Á‚½
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Bullet")
+        {
+            HP--;
+        }
+        //ƒ‚ƒu‚É“–‚½‚Á‚½
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Enemy")
+        {
+            HP -= 1;
+            Debug.Log("bbb");
+        }
+
+        //Ÿ—˜ˆ—
+        if (HP < 1)
+        {
+
+            this.gameObject.SetActive(false);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 }

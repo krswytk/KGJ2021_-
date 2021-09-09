@@ -7,7 +7,7 @@ public class Skill3 : MonoBehaviour
     SkillButton SkillButton;
     void Start()
     {
-        if (!SkillButton) SkillButton = GameObject.Find("Canvas").GetComponent<SkillButton>();
+
     }
     public void Click()
     {

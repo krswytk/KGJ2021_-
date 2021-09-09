@@ -56,12 +56,12 @@ public class EnemyManager : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         //’e‚É“–‚½‚Á‚½
-        if (other.tag == "Bullet")
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Bullet")
         {
             EnemyHomeHP--;
         }
         //ƒ‚ƒu‚É“–‚½‚Á‚½
-        if(other.tag == "Player")
+        if(LayerMask.LayerToName(other.gameObject.layer) == "Player")
         {
             EnemyHomeHP -= 5;
         }
