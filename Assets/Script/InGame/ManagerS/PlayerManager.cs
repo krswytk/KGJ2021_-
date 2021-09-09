@@ -57,19 +57,19 @@ public class PlayerManager : MonoBehaviour
 #endif
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnCollisionEnter(Collision other)
     {
         //弾に当たった
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Bullet")
+        if (other.gameObject.tag == "Bullet")
         {
             PlayerHomeHP--;
         }
         //モブに当たった
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
-            PlayerHomeHP -= 5;
+            Debug.Log("aaa");
+            PlayerHomeHP -= 1;
         }
-
         //敗北処理
         if (PlayerHomeHP < 1)
         {
