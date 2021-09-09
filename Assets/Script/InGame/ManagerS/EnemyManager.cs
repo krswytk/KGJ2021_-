@@ -69,6 +69,7 @@ public class EnemyManager : MonoBehaviour
         //Ÿ—˜ˆ—
         if (EnemyHomeHP < 1)
         {
+            Lisult.GameSet = false;
             Debug.Log("Ÿ‚Á‚½Ÿ‚Á‚½I");
             SceneManagerScript.LoadRisult();
         }
