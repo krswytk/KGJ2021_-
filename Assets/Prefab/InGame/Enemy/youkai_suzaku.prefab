@@ -120,6 +120,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0.5
   HP: 5
+  HitCoolTime: 0.5
+  _color:
+  - {fileID: 1563407461823213892}
 --- !u!70 &1563407461823213891
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
