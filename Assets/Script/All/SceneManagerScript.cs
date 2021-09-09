@@ -5,10 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerScript : SingletonMonoBehaviour<SceneManagerScript>
 {
+    
+
+
+
+
+
+
 
     public void LoadTitle()
     {
-
+        SceneManager.LoadScene("title");
     }
 
 
@@ -23,5 +30,10 @@ public class SceneManagerScript : SingletonMonoBehaviour<SceneManagerScript>
         SceneManager.LoadScene("Risult");
     }
 
+
+    public void StrtBotton()
+    {
+        SceneManager.LoadScene("InGame");
+    }
     
 }

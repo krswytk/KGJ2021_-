@@ -21,7 +21,8 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Rigidbody2D.velocity = SpeedVector*Time.deltaTime;
+        Rigidbody2D.velocity = SpeedVector;
+        // Rigidbody2D.velocity = SpeedVector * Time.deltaTime;
     }
 
     public void Hit(int Damage)
@@ -32,4 +33,29 @@ public class EnemyAI : MonoBehaviour
             Destroy(this);
         }
     }
+    public void OnCollisionEnter(Collision other)
+    {
+        //íeÇ…ìñÇΩÇ¡ÇΩ
+        if (other.gameObject.tag == "Bullet")
+        {
+            HP--;
+        }
+        //ÉÇÉuÇ…ìñÇΩÇ¡ÇΩ
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("aaa");
+            HP -=1;
+        }
+
+        //èüóòèàóù
+        if (HP < 1)
+        {
+
+            this.gameObject.SetActive(false);
+        }
+    }
+
+
+
+
 }

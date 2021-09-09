@@ -17,7 +17,10 @@ public class PlayerManager : MonoBehaviour
     private float MPTimer;
     [SerializeField] PlayerMP PlayerMP;
 
-
+    // 位置座標
+    private Vector3 position;
+    // スクリーン座標をワールド座標に変換した位置座標
+    private Vector3 screenToWorldPointPosition;
 
 
     private float Timer = 0f;
@@ -48,8 +51,15 @@ public class PlayerManager : MonoBehaviour
             if (MP > MpMax) MP = MpMax;
             PlayerMP.UsingMP(MP, MpMax);//MPゲージに反映
 
-            Debug.Log("MP = " + MP);
+            //Debug.Log("MP = " + MP);
         }
+
+        // Vector3でマウス位置座標を取得する
+        position = Input.mousePosition;
+        // Z軸修正
+        position.z = 10f;
+        // マウス位置座標をスクリーン座標からワールド座標に変換する
+        screenToWorldPointPosition = Camera.main.ScreenToWorldPoint(position);
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha1)) SkilOn(1, 0);
@@ -60,22 +70,25 @@ public class PlayerManager : MonoBehaviour
 #endif
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnCollisionEnter(Collision other)
     {
         //弾に当たった
-        if (other.tag == "Bullet")
+        if (other.gameObject.tag == "Bullet")
         {
             PlayerHomeHP--;
         }
         //モブに当たった
-        if (other.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
-            PlayerHomeHP -= 5;
+            Debug.Log("aaa");
+            PlayerHomeHP -= 1;
         }
-
         //敗北処理
         if (PlayerHomeHP < 1)
         {
+
+            Lisult.GameSet = false;
+            
             Debug.Log("まけちゃった");
             SceneManagerScript.LoadRisult();
         }
@@ -143,7 +156,7 @@ public class PlayerManager : MonoBehaviour
                 MPCost = SkilManager.MPCostCheck(MP, 0);
                 if (MPCost != -1)
                 {
-                    SkilManager.Skill_4(x);
+                    SkilManager.Skill_4(screenToWorldPointPosition.x);
                     MP -= MPCost;
                 }
                 else
@@ -156,7 +169,7 @@ public class PlayerManager : MonoBehaviour
                 MPCost = SkilManager.MPCostCheck(MP, 0);
                 if (MPCost != -1)
                 {
-                    SkilManager.Skill_5(x);
+                    SkilManager.Skill_5(screenToWorldPointPosition.x);
                     MP -= MPCost;
                 }
                 else

@@ -83,21 +83,29 @@ public class SkillButton : MonoBehaviour
             WallSw = false;
             WallAreaImage.SetActive(false);
         }
+    }
+    public void Skill4Select()
+    {
         PlayerManager.SkilOn(4, 0);
+        Skill4();
     }
     public void Skill5()
     {
-        if (!WallSw)
+        if (!HealSw)
         {
-            WallSw = true;
-            WallAreaImage.SetActive(true);
+            HealSw = true;
+            HealAreaImage.SetActive(true);
         }
         else
         {
-            WallSw = false;
-            WallAreaImage.SetActive(false);
+            HealSw = false;
+            HealAreaImage.SetActive(false);
         }
-        PlayerManager.SkilOn(5, 0);
     }
 
+    public void Skill5Select()
+    {
+        PlayerManager.SkilOn(5, 0);
+        Skill5();
+    }
 }
