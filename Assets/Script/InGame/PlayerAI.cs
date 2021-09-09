@@ -13,6 +13,8 @@ public class PlayerAI : MonoBehaviour
     [SerializeField] private int HP = 10;
     [SerializeField] private int HealCoolTime = 2;
     private bool HealSw = true;
+    [SerializeField] private float HitCoolTime = 0.5f;
+    private bool HitCoolTimeSw = true;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +36,23 @@ public class PlayerAI : MonoBehaviour
        // Rigidbody2D.velocity = SpeedVector * Time.deltaTime;
     }
 
-    public void OnTriggerStay(Collider other)
+    public void Hit(int Damage)
+    {
+        if (HitCoolTimeSw)
+        {
+            HP -= Damage;
+            HitCoolTimeSw = false;
+            StartCoroutine(HitCoolTimeRiflesh());
+            //‘Ì—Í‚ª‚È‚­‚È‚Á‚½‚ç
+            if (Damage < 1)
+            {
+                //Ž©g‚ðíœ
+                Destroy(this);
+            }
+            return;
+        }
+    }
+    public void OnTriggerStay2D(Collider2D other)
     {
         //HP
         if (HealSw) {
@@ -43,6 +61,17 @@ public class PlayerAI : MonoBehaviour
                 HP++;
                 StartCoroutine(HealCool());
             }
+        }
+
+        //’e‚É“–‚½‚Á‚½
+        if (other.gameObject.tag == "Bullet")
+        {
+            Hit(1);
+        }
+        //ƒ‚ƒu‚É“–‚½‚Á‚½
+        if (other.gameObject.tag == "Enemy")
+        {
+            Hit(2);
         }
     }
 
@@ -57,38 +86,10 @@ public class PlayerAI : MonoBehaviour
         yield break;
     }
 
-
-
-    public void OnCollisionEnter(Collision other)
+    private IEnumerator HitCoolTimeRiflesh()
     {
-        Debug.Log("aaa");
-        //’e‚É“–‚½‚Á‚½
-        if (other.gameObject.tag == "Bullet")
-        {
-            HP--;
-        }
-        //ƒ‚ƒu‚É“–‚½‚Á‚½
-        if (other.gameObject.tag == "Enemy")
-        {
-            Debug.Log("aaa");
-            HP -= 1;
-        }
-
-        //Ÿ—˜ˆ—
-        if (HP < 1)
-        {
-
-            this.gameObject.SetActive(false);
-        }
+        yield return new WaitForSeconds(HitCoolTime);
+        HitCoolTimeSw = true;
+        yield return null;
     }
-
-
-
-
-
-
-
-
-
-
 }

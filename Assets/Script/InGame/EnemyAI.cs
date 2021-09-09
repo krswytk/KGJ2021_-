@@ -6,10 +6,12 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private float Speed = 0.1f;
     [SerializeField] private int HP = 10;
+    [SerializeField] private float HitCoolTime = 0.5f;
 
     private Rigidbody2D Rigidbody2D;
-
     private Vector2 SpeedVector;
+
+    private bool HitCoolTimeSw = true;
 
     // Start is called before the first frame update
     void Start()
@@ -22,45 +24,44 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         Rigidbody2D.velocity = SpeedVector;
-        // Rigidbody2D.velocity = SpeedVector * Time.deltaTime;
     }
 
     public void Hit(int Damage)
     {
-        HP -= Damage;
-        if(Damage < 1)
+        if (HitCoolTimeSw)
         {
-            Destroy(this);
+            HP -= Damage;
+            HitCoolTimeSw = false;
+            StartCoroutine(HitCoolTimeRiflesh());
+            //‘Ì—Í‚ª‚È‚­‚È‚Á‚½‚ç
+            if (Damage < 1)
+            {
+                //Ž©g‚ðíœ
+                Destroy(this);
+            }
+            return;
         }
     }
-    public void OnCollisionEnter(Collision other)
+
+
+    public void OnCollisionEnter2D(Collision2D other)
     {
-
-        Debug.Log("aaa");
-
-
-
         //’e‚É“–‚½‚Á‚½
         if (other.gameObject.tag == "Bullet")
         {
-            HP--;
+            Hit(1);
         }
         //ƒ‚ƒu‚É“–‚½‚Á‚½
         if (other.gameObject.tag == "Player")
         {
-            
-            HP --;
-        }
-
-        //Ÿ—˜ˆ—
-        if (HP < 1)
-        {
-
-            this.gameObject.SetActive(false);
+            Hit(2);
         }
     }
 
-
-
-
+    private IEnumerator HitCoolTimeRiflesh()
+    {
+        yield return new WaitForSeconds(HitCoolTime);
+        HitCoolTimeSw = true;
+        yield return null;
+    }
 }
