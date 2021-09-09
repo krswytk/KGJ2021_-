@@ -35,6 +35,11 @@ public class EnemyAI : MonoBehaviour
     }
     public void OnCollisionEnter(Collision other)
     {
+
+        Debug.Log("aaa");
+
+
+
         //’e‚É“–‚½‚Á‚½
         if (other.gameObject.tag == "Bullet")
         {
@@ -43,8 +48,8 @@ public class EnemyAI : MonoBehaviour
         //ƒ‚ƒu‚É“–‚½‚Á‚½
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("aaa");
-            HP -=1;
+            
+            HP --;
         }
 
         //Ÿ—˜ˆ—

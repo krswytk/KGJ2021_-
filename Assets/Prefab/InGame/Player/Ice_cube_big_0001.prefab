@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3799595988972244583}
   - component: {fileID: 9184946377354136765}
   - component: {fileID: -4930873641485101932}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ice_cube_big_0001
   m_TagString: Player
   m_Icon: {fileID: 0}
