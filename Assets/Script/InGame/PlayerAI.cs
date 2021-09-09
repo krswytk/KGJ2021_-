@@ -54,6 +54,7 @@ public class PlayerAI : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D other)
     {
+        Debug.Log("aaa");
         //HP
         if (HealSw) {
             if (other.tag == "Heal")
@@ -71,6 +72,7 @@ public class PlayerAI : MonoBehaviour
         //ƒ‚ƒu‚É“–‚½‚Á‚½
         if (other.gameObject.tag == "Enemy")
         {
+          
             Hit(2);
         }
     }
