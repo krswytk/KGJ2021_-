@@ -13,7 +13,7 @@ public class Lisult : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameSet = a;
+        
 
         if (GameSet == false)
         {

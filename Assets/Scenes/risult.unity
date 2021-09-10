@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243e53bc3c20b4f478e016aa613febb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a: 1
+  a: 0
   Win: {fileID: 248195949}
   Loose: {fileID: 913306177}
 --- !u!1 &248195949

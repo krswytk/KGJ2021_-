@@ -54,6 +54,7 @@ public class PlayerAI : MonoBehaviour
                 if(this.gameObject.name == "PlayerManager")
                 {
                     //îsñkèàóù
+                    Lisult.GameSet = false;
                     SceneManager.LoadScene("Risult");
 
                 }
@@ -63,13 +64,16 @@ public class PlayerAI : MonoBehaviour
             return;
         }
     }
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log(" tag " + other.gameObject.tag);
+        Debug.Log(" tagaaaa " + other.gameObject.tag);
         //HP
+
+        Debug.Log("aaa");
+
         if (HealSw)
         {
-            if (other.tag == "Heal")
+            if (other.gameObject.tag == "Heal")
             {
                 HP++;
                 StartCoroutine(HealCool());
@@ -86,12 +90,12 @@ public class PlayerAI : MonoBehaviour
             Hit(2);
         }
     }
-    public void OnTriggerStay2D(Collider2D other)
+    public void OnCollisionStay2D(Collision2D other)
     {
-        Debug.Log("aaa");
+       
         //HP
         if (HealSw) {
-            if (other.tag == "Heal")
+            if (other.gameObject.tag == "Heal")
             {
                 HP++;
                 StartCoroutine(HealCool());

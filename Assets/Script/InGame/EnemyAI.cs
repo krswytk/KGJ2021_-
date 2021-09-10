@@ -46,6 +46,7 @@ public class EnemyAI : MonoBehaviour
                 if (this.gameObject.name == "EnemyManager")
                 {
                     //”s–kˆ—
+                    Lisult.GameSet =true;
                     SceneManager.LoadScene("Risult");
 
                 }
