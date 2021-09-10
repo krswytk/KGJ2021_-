@@ -49,7 +49,7 @@ public class PlayerManager : MonoBehaviour
             if (MP > MpMax) MP = MpMax;
             PlayerMP.UsingMP(MP, MpMax);//MPゲージに反映
 
-            //Debug.Log("MP = " + MP);
+           
         }
 
         // Vector3でマウス位置座標を取得する
@@ -75,11 +75,12 @@ public class PlayerManager : MonoBehaviour
         switch (i){
 
             case 0:
-                MPCost = SkilManager.MPCostCheck(MP, 0);
+                MPCost = SkilManager.MPCostCheck(MP, 1);
                 if (MPCost != -1)
                 {
                     SkilManager.Skill_1();
                     MP -= MPCost;
+                    Debug.Log("MP = " + MP);
                 }
                 else
                 {
@@ -88,11 +89,12 @@ public class PlayerManager : MonoBehaviour
                 break;
 
             case 1:
-                MPCost = SkilManager.MPCostCheck(MP, 0);
+                MPCost = SkilManager.MPCostCheck(MP, 2);
                 if (MPCost != -1)
                 {
                     SkilManager.Skill_1();
                     MP -= MPCost;
+                    Debug.Log("MP = " + MP);
                 }
                 else
                 {
@@ -101,11 +103,12 @@ public class PlayerManager : MonoBehaviour
                 break;
 
             case 2:
-                MPCost = SkilManager.MPCostCheck(MP, 0);
+                MPCost = SkilManager.MPCostCheck(MP, 3);
                 if (MPCost != -1)
                 {
                     SkilManager.Skill_2();
                     MP -= MPCost;
+                    Debug.Log("MP = " + MP);
                 }
                 else
                 {
@@ -114,11 +117,12 @@ public class PlayerManager : MonoBehaviour
                 break;
 
             case 3:
-                MPCost = SkilManager.MPCostCheck(MP, 0);
+                MPCost = SkilManager.MPCostCheck(MP, 4);
                 if (MPCost != -1)
                 {
                     SkilManager.Skill_3();
                     MP -= MPCost;
+                    Debug.Log("MP = " + MP);
                 }
                 else
                 {
@@ -127,11 +131,12 @@ public class PlayerManager : MonoBehaviour
                 break;
 
             case 4:
-                MPCost = SkilManager.MPCostCheck(MP, 0);
+                MPCost = SkilManager.MPCostCheck(MP, 5);
                 if (MPCost != -1)
                 {
                     SkilManager.Skill_4(screenToWorldPointPosition.x);
                     MP -= MPCost;
+                    Debug.Log("MP = " + MP);
                 }
                 else
                 {

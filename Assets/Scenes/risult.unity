@@ -652,7 +652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &248195950
 Transform:
   m_ObjectHideFlags: 0
@@ -826,7 +826,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You Loose
+  m_Text: You Win
 --- !u!222 &464886236
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1757,7 +1757,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You Loose
+  m_Text: You Win
 --- !u!222 &1365321120
 CanvasRenderer:
   m_ObjectHideFlags: 0
