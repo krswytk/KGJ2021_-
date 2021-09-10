@@ -11,7 +11,7 @@ public class SkilManager : MonoBehaviour
     [SerializeField] private GameObject Magic;
     [SerializeField] private float MagicTime = 10;
 
-    [SerializeField] private int[] ArthMP = { 20, 20, 20, 20, 20, 20 };
+    [SerializeField] private int[] ArthMP = { 20, 10, 20, 60, 20, 20 };
 
     private float Timer;
     // Start is called before the first frame update

@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
-  HP: 5
-  HealCoolTime: 2
+  HP: 7
+  HealCoolTime: 3
   HitCoolTime: 0.5
   _color:
   - {fileID: 6340827818868308210}

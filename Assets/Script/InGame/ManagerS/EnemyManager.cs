@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour
     [Header("“G–{w‚ÌHP")]
     [SerializeField] private int EnemyHomeHP = 100;
     [Header("“GPOP‚ÌƒN[ƒ‹ƒ^ƒCƒ€(•b)")]
-    [SerializeField] private int EnemyCreateCoolTime = 10;
+    [SerializeField] private int EnemyCreateCoolTime =1;
 
     [Header("“G‚ÌƒvƒŒƒnƒu")]
     [SerializeField] private GameObject[] EnemyPrefab;
@@ -37,7 +37,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         //ŽžŠÔŒv‘ª
-        CoolTimer += Time.deltaTime;
+        CoolTimer += Time.deltaTime*2;
 
         if(CoolTimer > EnemyCreateCoolTime)
         {
